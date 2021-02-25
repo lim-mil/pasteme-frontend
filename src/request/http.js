@@ -67,3 +67,15 @@ export function post(url, params) {
     })
   })
 }
+
+export function delete_(url, params) {
+  return new Promise((resolve, reject) => {
+    axios.delete(url, {
+      params: params
+    }).then(res => {
+      resolve(res.data);
+    }).catch(err => {
+      reject(err.data);
+    })
+  })
+}

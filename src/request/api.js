@@ -1,4 +1,4 @@
-import {post} from "@/request/http";
+import {post, get, delete_} from "@/request/http";
 
 export const apiLogin = (email, password) => {
   let url = "/users/login";
@@ -16,4 +16,14 @@ export const apiUploadText = (text) => {
     "content": text
   }
   return post(url, params);
+}
+
+export const apiRecordList = () => {
+  let url = "/records";
+  return get(url);
+}
+
+export const apiDeleteRecord = id => {
+  let url = "/records/" + id;
+  return delete_(url);
 }

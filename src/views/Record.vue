@@ -16,22 +16,21 @@
       </div>
       <div class="container">
 
-        <div class="card">
+
+        <div class="card mb-5" v-for="(record, index) in records" :key="record.id">
           <div class="card-content">
             <div class="content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-              <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+              {{record.content}}
               <br>
-              <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+              <time>{{record.created_at}}</time>
             </div>
           </div>
           <footer class="card-footer">
             <a href="#" class="card-footer-item">Save</a>
             <a href="#" class="card-footer-item">Edit</a>
-            <a href="#" class="card-footer-item">Delete</a>
+            <a href="#" class="card-footer-item" @click="deleteRecord(record.id, index)">Delete</a>
           </footer>
         </div>
-        <br/>
 
         <div class="card">
           <div class="card-content">
@@ -91,25 +90,41 @@
 </template>
 
 <script>
-import {apiUploadText} from "@/request/api";
+import {apiDeleteRecord, apiRecordList, apiUploadText} from "@/request/api";
 
 export default {
   name: "Record",
   data: () => {
     return {
-      text: ""
+      text: "",
+      records: []
     }
   },
   methods: {
     saveText: function() {
-      console.log("fsdfsd");
-      console.log(this.text);
       apiUploadText(this.text).then(response => {
         if (response.code === 200) {
           this.text = "";
         }
       })
+    },
+    deleteRecord: function(id, index) {
+      apiDeleteRecord(id).then(response => {
+        if (response.code === 200) {
+          this.records.splice(index, 1);
+        }
+      })
     }
+  },
+  mounted() {
+    apiRecordList().then(response => {
+      console.log(response);
+      for (let i = 0; i < response.data.length; i++) {
+        let created_at = new Date(response.data[i].created_at*1000)
+        response.data[i].created_at = created_at.getFullYear() + "-" + created_at.getMonth() + "-" + created_at.getDay();
+        this.records.push(response.data[i]);
+      }
+    })
   }
 }
 </script>
