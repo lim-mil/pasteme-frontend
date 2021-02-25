@@ -37,7 +37,7 @@ const routes = [
   {
     path: "/records",
     name: "Record",
-    component: () => import("../views/")
+    component: () => import("../views/Record")
   }
 
 ]

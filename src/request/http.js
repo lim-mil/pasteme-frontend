@@ -1,10 +1,14 @@
 import axios from "axios";
 import router from "@/router";
 import Vue from "vue";
+import CONFIG from "@/config"
 
-axios.defaults.baseURL = 'http://localhost:9999';
+// 请求前缀
+axios.defaults.baseURL = CONFIG.BASE_SERVER;
+// 请求头
 axios.defaults.headers.post['Content-Type'] = "application/json";
 axios.defaults.headers.get['Content-Type'] = "application/json";
+// 超时
 axios.defaults.timeout = 10000;
 
 axios.interceptors.request.use(
@@ -38,7 +42,6 @@ axios.interceptors.response.use(
     }
     return Promise.reject(error);
   }
-
 )
 
 Vue.prototype.$http = axios;
