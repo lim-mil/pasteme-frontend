@@ -9,13 +9,10 @@
           <div class="control">
             <button class="button is-link" @click="saveText">保存</button>
           </div>
-          <div class="control">
-            <button class="button is-link">上传文件</button>
-          </div>
+          <input class="file-input" :value="file" @change="uploadFile($event)" type="file" name="resume">
         </div>
       </div>
       <div class="container">
-
 
         <div class="card mb-5" v-for="(record, index) in records" :key="record.id">
           <div class="card-content">
@@ -90,14 +87,15 @@
 </template>
 
 <script>
-import {apiDeleteRecord, apiRecordList, apiUploadText} from "@/request/api";
+import {apiDeleteRecord, apiRecordList, apiUploadFile, apiUploadText} from "@/request/api";
 
 export default {
   name: "Record",
   data: () => {
     return {
       text: "",
-      records: []
+      records: [],
+      file: null
     }
   },
   methods: {
@@ -112,6 +110,14 @@ export default {
       apiDeleteRecord(id).then(response => {
         if (response.code === 200) {
           this.records.splice(index, 1);
+        }
+      })
+    },
+    uploadFile: function(event) {
+      let file = event.target.files[0];
+      apiUploadFile("/records", file).then(response => {
+        if (response.code === 200) {
+          console.log();
         }
       })
     }
