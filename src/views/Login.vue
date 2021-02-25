@@ -4,17 +4,17 @@
       <div class="container">
         <div class="field">
           <p class="control">
-            <input class="input" type="email" placeholder="Email">
+            <input class="input" v-model="email" type="email" placeholder="Email">
           </p>
         </div>
         <div class="field">
           <p class="control">
-            <input class="input" type="password" placeholder="Password">
+            <input class="input" v-model="password" type="password" placeholder="Password">
           </p>
         </div>
         <div class="field">
           <p class="control">
-            <button class="button is-success">
+            <button class="button is-success" @click="login">
               Login
             </button>
           </p>
@@ -37,11 +37,13 @@ export default {
   },
   methods: {
     login: function () {
-      apiLogin(this.username, this.password).then(response => {
+      apiLogin(this.email, this.password).then(response => {
+        console.log(response)
         let jwt = response.data.token;
         let username = response.data.username;
         localStorage.setItem("JWT_TOKEN", jwt);
         localStorage.setItem("username", username);
+        this.$router.push({"name": "Record"});
       })
     }
   }

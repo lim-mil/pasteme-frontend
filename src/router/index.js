@@ -21,14 +21,15 @@ const routes = [
   {
     path: "/users",
     name: "User",
+    component: () => import("../views/User"),
     children: [
       {
-        path: "/login",
+        path: "login",
         name: "Login",
         component: () => import("../views/Login")
       },
       {
-        path: "/register",
+        path: "register",
         name: "Register",
         component: () => import("../views/Register")
       }

@@ -34,7 +34,7 @@ axios.interceptors.response.use(
           localStorage.removeItem("JWT_TOKEN");
           localStorage.removeItem("username");
           router.replace({
-            path: "Login",
+            path: "users/login",
             query: {redirect: router.currentRoute.fullPath}
           });
           break;
@@ -51,21 +51,19 @@ export function get(url, params) {
     axios.get(url, {
       params: params
     }).then(res => {
-      return resolve(res.data);
+      resolve(res.data);
     }).catch(err => {
-      return reject(err.data);
+      reject(err.data);
     })
   })
 }
 
 export function post(url, params) {
   return new Promise((resolve, reject) => {
-    axios.post(url, {
-      params: params
-    }).then(res => {
-      return resolve(res.data);
+    axios.post(url, params).then(res => {
+      resolve(res.data);
     }).catch(err => {
-      return reject(err.data);
+      reject(err.data);
     })
   })
 }

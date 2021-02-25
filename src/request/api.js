@@ -1,11 +1,19 @@
 import {post} from "@/request/http";
 
-export const apiLogin = (username, password) => {
+export const apiLogin = (email, password) => {
   let url = "/users/login";
   let params = {
-    "username": username,
+    "email": email,
     "password": password
   }
   return post(url, params);
 }
 
+export const apiUploadText = (text) => {
+  let url = "/records";
+  let params = {
+    "type": "text",
+    "content": text
+  }
+  return post(url, params);
+}
