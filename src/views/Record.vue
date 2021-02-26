@@ -1,5 +1,8 @@
 <template>
-  <div class="record">
+  <div id="record">
+    <Navbar>
+
+    </Navbar>
     <div class="section">
       <div class="container mb-5">
         <div class="control mb-2">
@@ -9,7 +12,7 @@
           <div class="control">
             <button class="button is-link" @click="saveText">保存</button>
           </div>
-          <input class="file-input" :value="file" @change="uploadFile($event)" type="file" name="resume">
+          <input @change="uploadFile($event)" type="file" name="content">
         </div>
       </div>
       <div class="container">
@@ -88,9 +91,13 @@
 
 <script>
 import {apiDeleteRecord, apiRecordList, apiUploadFile, apiUploadText} from "@/request/api";
+import Navbar from "@/components/Navbar";
 
 export default {
   name: "Record",
+  components: {
+    Navbar
+  },
   data: () => {
     return {
       text: "",
