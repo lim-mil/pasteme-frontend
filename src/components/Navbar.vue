@@ -1,6 +1,6 @@
 <template>
   <div id="navbar">
-    <nav class="navbar is-transparent">
+    <nav class="navbar is-dark">
       <div class="navbar-brand">
         <p class="navbar-item">
           pasteme
