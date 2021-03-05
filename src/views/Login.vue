@@ -4,7 +4,7 @@
       <div class="container">
         <div class="field">
           <p class="control">
-            <input class="input" v-model="email" type="email" placeholder="Email">
+            <input class="input" v-model="username" type="text" placeholder="Username">
           </p>
         </div>
         <div class="field">
@@ -31,18 +31,15 @@ export default {
   name: "Login",
   data: () => {
     return {
-      email: "",
+      username: "",
       password: ""
     }
   },
   methods: {
     login: function () {
-      apiLogin(this.email, this.password).then(response => {
-        console.log(response)
+      apiLogin(this.username, this.password).then(response => {
         let jwt = response.data.token;
-        let username = response.data.username;
         localStorage.setItem("JWT_TOKEN", jwt);
-        localStorage.setItem("username", username);
         this.$router.push({"name": "Record"});
       })
     }

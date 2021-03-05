@@ -1,10 +1,10 @@
 import {post, get, delete_} from "@/request/http";
 import axios from "axios";
 
-export const apiLogin = (email, password) => {
+export const apiLogin = (username, password) => {
   let url = "/users/login";
   let params = {
-    "email": email,
+    "username": username,
     "password": password
   }
   return post(url, params);
@@ -36,8 +36,7 @@ export const apiUploadFile = (url, file) => {
       "Content-Type": "application/x-www-form-urlencoded"
     }
   }
-  form.append("type", "file");
-  form.append("content", file);
+  form.append("file", file);
 
   return axios.post(url, form, config);
 }
