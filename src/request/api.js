@@ -40,3 +40,8 @@ export const apiUploadFile = (url, file) => {
 
   return axios.post(url, form, config);
 }
+
+export const apiDeleteFile = (id) => {
+  let url = '/records/' + id;
+  return delete_(url);
+}
