@@ -30,6 +30,7 @@
             </div>
             <div class="card-content">
               <p>{{ record.filename }}</p>
+              <p>{{ makeImageUri(record.id) }}</p>
               <div>
                 <button class="button is-danger" @click="deleteFile(record.id)">删除</button>
               </div>
