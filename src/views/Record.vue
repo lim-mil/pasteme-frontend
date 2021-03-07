@@ -47,6 +47,7 @@
 <script>
 import {apiDeleteRecord, apiRecordList, apiUploadFile, apiUploadText} from "@/request/api";
 import Navbar from "@/components/Navbar";
+import CONFIG from "../config";
 
 export default {
   name: "Record",
@@ -92,7 +93,7 @@ export default {
       })
     },
     makeImageUri(id) {
-      return "http://localhost:9999/records/" + id;
+      return CONFIG.BASE_SERVER + '/records/' + id;
     }
   },
   mounted() {
