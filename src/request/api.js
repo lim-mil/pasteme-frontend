@@ -45,3 +45,8 @@ export const apiDeleteFile = (id) => {
   let url = '/records/' + id;
   return delete_(url);
 }
+
+export const apiCheckout = (code) => {
+  let url = '/users/checkout/' + code;
+  return get(url);
+}
